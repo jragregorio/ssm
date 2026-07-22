@@ -13,7 +13,9 @@ This storefront now supports an order-request workflow:
 - `index.html`
   Customer-facing storefront and order form.
 - `google-apps-script/Code.gs`
-  Google Apps Script endpoint that saves each order to a sheet named `Orders`.
+  Google Apps Script endpoint that saves each order to a sheet named `Orders`, and serves/updates product listings from a `Products` sheet.
+- `admin.html`
+  Password-gated page for adding and updating listings (see `PRODUCTS_SETUP.md`).
 
 ## One-Time Setup
 
@@ -102,3 +104,5 @@ If your `Orders` sheet already has rows, the updated script will:
 ## Important Note
 
 The current website does not process online payments. It only captures order requests and sends them to the sheet for manual follow-up.
+
+For product listings and the admin page, see **[PRODUCTS_SETUP.md](PRODUCTS_SETUP.md)**.

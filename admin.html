@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSM Admin — Product Listings</title>
+  <style>
+    :root {
+      --bg: #f7fbfc;
+      --surface: #ffffff;
+      --text: #16313a;
+      --muted: #5f7880;
+      --accent: #157a8a;
+      --accent-dark: #0f5e69;
+      --border: #d8e7eb;
+      --danger: #a94435;
+      --danger-soft: #fff8f7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(ellipse at top left, rgba(21, 122, 138, 0.08), transparent 45%),
+        linear-gradient(180deg, #eef7f9 0%, var(--bg) 40%, #f4fafb 100%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(960px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 1.5rem 0 3rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.45rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle,
+    .hint,
+    .status {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .status {
+      margin: 0.75rem 0 1rem;
+      min-height: 1.35em;
+    }
+
+    .status.is-error {
+      color: var(--danger);
+    }
+
+    .status.is-success {
+      color: #1f7a45;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.15rem 1.2rem;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 10px 28px rgba(16, 70, 80, 0.05);
+    }
+
+    .panel h2 {
+      font-size: 1.05rem;
+      margin-bottom: 0.85rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      font: inherit;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.75rem;
+      background: #fff;
+      color: var(--text);
+      margin-bottom: 0.85rem;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 0.85rem;
+    }
+
+    .form-grid .full {
+      grid-column: 1 / -1;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.25rem;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.65rem 1.1rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .button-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .button-secondary {
+      background: #e8f3f5;
+      color: var(--accent-dark);
+    }
+
+    .button-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(169, 68, 53, 0.35);
+    }
+
+    .button-link {
+      background: transparent;
+      color: var(--accent);
+      text-decoration: underline;
+      padding: 0.4rem 0.2rem;
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .login-card {
+      max-width: 420px;
+      margin: 3rem auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.65rem 0.45rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    tr.is-selected {
+      background: #eef7f9;
+    }
+
+    tr.is-inactive td {
+      opacity: 0.72;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge-on {
+      background: #e5f7ea;
+      color: #1f7a45;
+    }
+
+    .badge-off {
+      background: #f3f4f5;
+      color: #667;
+    }
+
+    .row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .row-actions button {
+      padding: 0.4rem 0.7rem;
+      font-size: 0.82rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 720px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.65rem 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      td {
+        border: 0;
+        padding: 0.25rem 0;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        margin-bottom: 0.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section id="login-view" class="panel login-card">
+      <h1>SSM Admin</h1>
+      <p class="subtitle">Sign in to add or update seafood listings.</p>
+      <form id="login-form" style="margin-top: 1rem;">
+        <label for="admin-password">Admin password</label>
+        <input id="admin-password" type="password" autocomplete="current-password" required>
+        <div class="button-row">
+          <button class="button-primary" type="submit">Sign in</button>
+        </div>
+      </form>
+      <p id="login-status" class="status" role="status"></p>
+      <p class="hint">Uses the same Apps Script endpoint as the storefront. Password is stored only in this browser tab.</p>
+    </section>
+
+    <section id="admin-view" class="hidden">
+      <header>
+        <div>
+          <h1>Product listings</h1>
+          <p class="subtitle">Add, edit, show, hide, or delete items on the shop.</p>
+        </div>
+        <div class="button-row">
+          <a class="button-link" href="index.html">← Back to shop</a>
+          <button id="logout-button" class="button-secondary" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <p id="admin-status" class="status" role="status"></p>
+
+      <div class="panel">
+        <h2 id="form-title">Add product</h2>
+        <form id="product-form">
+          <input id="product-id" type="hidden">
+          <div class="form-grid">
+            <div>
+              <label for="product-name">Name</label>
+              <input id="product-name" type="text" required maxlength="80">
+            </div>
+            <div>
+              <label for="product-price">Price (PHP)</label>
+              <input id="product-price" type="number" min="0" step="0.01" required>
+            </div>
+            <div>
+              <label for="product-unit">Unit</label>
+              <input id="product-unit" type="text" placeholder="/ kilo" maxlength="40">
+            </div>
+            <div>
+              <label for="product-eyebrow">Eyebrow / tag</label>
+              <input id="product-eyebrow" type="text" placeholder="Best Seller" maxlength="40">
+            </div>
+            <div>
+              <label for="product-sort">Sort order</label>
+              <input id="product-sort" type="number" step="1" placeholder="10">
+            </div>
+            <div>
+              <label for="product-active">Visible on shop</label>
+              <select id="product-active">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="product-image">Image path or URL</label>
+              <input id="product-image" type="text" placeholder="images/product-pompano.png" maxlength="300">
+            </div>
+            <div class="full">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" maxlength="500"></textarea>
+            </div>
+          </div>
+          <div class="button-row">
+            <button class="button-primary" type="submit">Save product</button>
+            <button id="reset-form-button" class="button-secondary" type="button">Clear form</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Current listings</h2>
+        <div class="button-row" style="margin-bottom: 0.85rem;">
+          <button id="refresh-button" class="button-secondary" type="button">Refresh list</button>
+        </div>
+        <div id="products-table-wrap">
+          <p class="hint">Loading products…</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycby6gJaaUC1fb_9QRXxXMIYBInF2Qd6kSZ4f1XBV8aSjm7cjeW6p9sqQgdWhqzIuUqE/exec";
+    const ADMIN_TOKEN_KEY = "ssm-admin-token";
+
+    const loginView = document.getElementById("login-view");
+    const adminView = document.getElementById("admin-view");
+    const loginForm = document.getElementById("login-form");
+    const loginStatus = document.getElementById("login-status");
+    const adminStatus = document.getElementById("admin-status");
+    const adminPasswordInput = document.getElementById("admin-password");
+    const logoutButton = document.getElementById("logout-button");
+    const refreshButton = document.getElementById("refresh-button");
+    const productForm = document.getElementById("product-form");
+    const formTitle = document.getElementById("form-title");
+    const resetFormButton = document.getElementById("reset-form-button");
+    const productsTableWrap = document.getElementById("products-table-wrap");
+
+    const fieldId = document.getElementById("product-id");
+    const fieldName = document.getElementById("product-name");
+    const fieldPrice = document.getElementById("product-price");
+    const fieldUnit = document.getElementById("product-unit");
+    const fieldEyebrow = document.getElementById("product-eyebrow");
+    const fieldSort = document.getElementById("product-sort");
+    const fieldActive = document.getElementById("product-active");
+    const fieldImage = document.getElementById("product-image");
+    const fieldDescription = document.getElementById("product-description");
+
+    let products = [];
+    let selectedId = "";
+    let busy = false;
+
+    function getToken() {
+      return sessionStorage.getItem(ADMIN_TOKEN_KEY) || "";
+    }
+
+    function setToken(token) {
+      if (token) {
+        sessionStorage.setItem(ADMIN_TOKEN_KEY, token);
+      } else {
+        sessionStorage.removeItem(ADMIN_TOKEN_KEY);
+      }
+    }
+
+    function setStatus(el, message, type) {
+      el.textContent = message || "";
+      el.className = "status" + (type ? " " + type : "");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatMoney(value) {
+      return "PHP " + Number(value || 0).toFixed(2);
+    }
+
+    function showAdmin() {
+      loginView.classList.add("hidden");
+      adminView.classList.remove("hidden");
+    }
+
+    function showLogin() {
+      adminView.classList.add("hidden");
+      loginView.classList.remove("hidden");
+      setToken("");
+      products = [];
+      resetForm();
+    }
+
+    function resetForm() {
+      selectedId = "";
+      fieldId.value = "";
+      fieldName.value = "";
+      fieldPrice.value = "";
+      fieldUnit.value = "/ kilo";
+      fieldEyebrow.value = "";
+      fieldSort.value = "";
+      fieldActive.value = "true";
+      fieldImage.value = "images/";
+      fieldDescription.value = "";
+      formTitle.textContent = "Add product";
+      renderTable();
+    }
+
+    function fillForm(product) {
+      selectedId = product.id;
+      fieldId.value = product.id;
+      fieldName.value = product.name || "";
+      fieldPrice.value = Number(product.price || 0).toFixed(2);
+      fieldUnit.value = product.unit || "";
+      fieldEyebrow.value = product.eyebrow || "";
+      fieldSort.value = product.sort === 0 || product.sort ? String(product.sort) : "";
+      fieldActive.value = product.active ? "true" : "false";
+      fieldImage.value = product.image || "";
+      fieldDescription.value = product.description || "";
+      formTitle.textContent = "Edit product";
+      renderTable();
+      productForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function buildQuery(params) {
+      const search = new URLSearchParams();
+      Object.keys(params).forEach(function (key) {
+        const value = params[key];
+        if (value === undefined || value === null) {
+          return;
+        }
+        search.set(key, String(value));
+      });
+      return search.toString();
+    }
+
+    async function apiGet(params) {
+      const query = buildQuery(params);
+      const response = await fetch(API_ENDPOINT + "?" + query, {
+        method: "GET",
+        redirect: "follow"
+      });
+      const data = await response.json();
+      if (!data || !data.ok) {
+        throw new Error((data && data.message) || "Request failed.");
+      }
+      return data;
+    }
+
+    async function loadProducts() {
+      setStatus(adminStatus, "Loading products…");
+      const data = await apiGet({
+        action: "products",
+        all: "1",
+        adminToken: getToken()
+      });
+      products = Array.isArray(data.products) ? data.products : [];
+      setStatus(adminStatus, products.length + " product" + (products.length === 1 ? "" : "s") + " loaded.", "is-success");
+      renderTable();
+    }
+
+    function renderTable() {
+      if (!products.length) {
+        productsTableWrap.innerHTML = '<p class="hint">No products yet. Add your first listing above.</p>';
+        return;
+      }
+
+      const rows = products
+        .map(function (product) {
+          const selectedClass = product.id === selectedId ? " is-selected" : "";
+          const inactiveClass = product.active ? "" : " is-inactive";
+          const badge = product.active
+            ? '<span class="badge badge-on">Visible</span>'
+            : '<span class="badge badge-off">Hidden</span>';
+          const toggleLabel = product.active ? "Hide" : "Show";
+
+          return (
+            '<tr class="' + selectedClass + inactiveClass + '" data-id="' + escapeHtml(product.id) + '">' +
+              '<td data-label="Name"><strong>' + escapeHtml(product.name) + "</strong><div class=\"hint\">" + escapeHtml(product.id) + "</div></td>" +
+              '<td data-label="Price">' + escapeHtml(formatMoney(product.price)) + (product.unit ? " " + escapeHtml(product.unit) : "") + "</td>" +
+              '<td data-label="Sort">' + escapeHtml(String(product.sort)) + "</td>" +
+              '<td data-label="Status">' + badge + "</td>" +
+              '<td data-label="Actions"><div class="row-actions">' +
+                '<button class="button-secondary" type="button" data-action="edit" data-id="' + escapeHtml(product.id) + '">Edit</button>' +
+                '<button class="' + (product.active ? "button-danger" : "button-primary") + '" type="button" data-action="toggle" data-id="' + escapeHtml(product.id) + '" data-active="' + (product.active ? "false" : "true") + '">' + toggleLabel + "</button>" +
+                '<button class="button-danger" type="button" data-action="delete" data-id="' + escapeHtml(product.id) + '">Delete</button>' +
+              "</div></td>" +
+            "</tr>"
+          );
+        })
+        .join("");
+
+      productsTableWrap.innerHTML =
+        "<table><thead><tr><th>Name</th><th>Price</th><th>Sort</th><th>Status</th><th>Actions</th></tr></thead><tbody>" +
+        rows +
+        "</tbody></table>";
+    }
+
+    async function saveProduct(event) {
+      event.preventDefault();
+      if (busy) {
+        return;
+      }
+
+      busy = true;
+      setStatus(adminStatus, "Saving product…");
+
+      try {
+        const payload = {
+          action: "upsertProduct",
+          adminToken: getToken(),
+          id: fieldId.value.trim(),
+          name: fieldName.value.trim(),
+          price: fieldPrice.value,
+          unit: fieldUnit.value.trim(),
+          eyebrow: fieldEyebrow.value.trim(),
+          description: fieldDescription.value.trim(),
+          image: fieldImage.value.trim(),
+          sort: fieldSort.value.trim(),
+          active: fieldActive.value
+        };
+
+        const data = await apiGet(payload);
+        setStatus(adminStatus, data.message || "Product saved.", "is-success");
+        await loadProducts();
+        if (data.product) {
+          fillForm(data.product);
+        }
+      } catch (error) {
+        setStatus(adminStatus, error.message || "Unable to save product.", "is-error");
+      } finally {
+        busy = false;
+      }
+    }
+
+    async function toggleActive(id, active) {
+      if (busy) {
+        return;
+      }
+
+      busy = true;
+      setStatus(adminStatus, "Updating visibility…");
+
+      try {
+        const data = await apiGet({
+          action: "setProductActive",
+          adminToken: getToken(),
+          id: id,
+          active: active
+        });
+        setStatus(adminStatus, data.message || "Visibility updated.", "is-success");
+        await loadProducts();
+      } catch (error) {
+        setStatus(adminStatus, error.message || "Unable to update visibility.", "is-error");
+      } finally {
+        busy = false;
+      }
+    }
+
+    async function deleteProduct(product) {
+      if (busy) {
+        return;
+      }
+
+      const confirmed = window.confirm(
+        'Delete "' + product.name + '" permanently from the listings sheet?\n\nThis cannot be undone. Prefer Hide if you might sell it again.'
+      );
+      if (!confirmed) {
+        return;
+      }
+
+      busy = true;
+      setStatus(adminStatus, "Deleting product…");
+
+      try {
+        const data = await apiGet({
+          action: "deleteProduct",
+          adminToken: getToken(),
+          id: product.id
+        });
+        if (selectedId === product.id) {
+          resetForm();
+        }
+        setStatus(adminStatus, data.message || "Product deleted.", "is-success");
+        await loadProducts();
+      } catch (error) {
+        setStatus(adminStatus, error.message || "Unable to delete product.", "is-error");
+      } finally {
+        busy = false;
+      }
+    }
+
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const token = adminPasswordInput.value.trim();
+      if (!token) {
+        return;
+      }
+
+      setStatus(loginStatus, "Checking password…");
+      try {
+        await apiGet({
+          action: "verifyAdmin",
+          adminToken: token
+        });
+        setToken(token);
+        setStatus(loginStatus, "");
+        showAdmin();
+        await loadProducts();
+      } catch (error) {
+        setToken("");
+        setStatus(loginStatus, error.message || "Sign-in failed.", "is-error");
+      }
+    });
+
+    logoutButton.addEventListener("click", function () {
+      showLogin();
+      setStatus(loginStatus, "Signed out.");
+    });
+
+    refreshButton.addEventListener("click", function () {
+      loadProducts().catch(function (error) {
+        setStatus(adminStatus, error.message || "Refresh failed.", "is-error");
+      });
+    });
+
+    resetFormButton.addEventListener("click", resetForm);
+    productForm.addEventListener("submit", saveProduct);
+
+    productsTableWrap.addEventListener("click", function (event) {
+      const button = event.target.closest("button[data-action]");
+      if (!button) {
+        return;
+      }
+
+      const id = button.dataset.id;
+      const action = button.dataset.action;
+      const product = products.find(function (entry) {
+        return entry.id === id;
+      });
+
+      if (!product) {
+        return;
+      }
+
+      if (action === "edit") {
+        fillForm(product);
+        return;
+      }
+
+      if (action === "toggle") {
+        toggleActive(id, button.dataset.active);
+        return;
+      }
+
+      if (action === "delete") {
+        deleteProduct(product);
+      }
+    });
+
+    if (getToken()) {
+      showAdmin();
+      loadProducts().catch(function (error) {
+        setStatus(adminStatus, error.message || "Session expired. Sign in again.", "is-error");
+        showLogin();
+      });
+    }
+  </script>
+</body>
+</html>

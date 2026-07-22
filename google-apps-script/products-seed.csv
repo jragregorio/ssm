@@ -1,0 +1,11 @@
+ID,Name,Price,Unit,Eyebrow,Description,Image,Sort,Active
+pompano,Pompano,340,/ kilo,Best Seller,"Clean, mild-flavored whole fish that works well for steaming, frying, or simple home-style meals.",images/product-pompano.png,10,TRUE
+tilapia,Tilapia,125,,Daily Catch,"Budget-friendly everyday fish that is easy to fry, grill, or cook in familiar Filipino recipes.",images/product-tilapia.png,20,FALSE
+salmon,Salmon,600,/ kilo,Premium Cut,"Rich, premium salmon that is ideal for baking, pan-searing, or serving as a special family meal.",images/product-salmon.png,30,TRUE
+shrimp,Shrimp,530,/ kilo,Market Favorite,"Fresh shrimp for stir-fry, butter garlic dishes, soups, and quick seafood platters at home.",images/product-shrimp.png,40,TRUE
+bangus,Bangus,200,/ kilo,Home Favorite,"Classic milkfish option for grilling, frying, or everyday family recipes with familiar local flavor.",images/product-bangus.png,50,TRUE
+sugpo,Sugpo,1400,,Large Prawns,"Large prawns for grilling, buttered seafood plates, and special-occasion family meals.",images/product-sugpo.png,60,TRUE
+tahong,Tahong,170,,Shellfish,"Fresh mussels that are great for soups, steaming, or simple garlic-butter preparations.",images/product-tahong.png,70,FALSE
+hasa-hasa,Hasa Hasa,350,,Daily Fish,"Versatile fish option for frying or stewing, added from your handwritten market list.",images/product-hasa-hasa.png,80,FALSE
+squid,Squid,450,/ kilo,Seafood Staple,"Fresh squid for adobo, calamares, stuffing, or classic seafood dishes at home.",images/product-squid.png,90,FALSE
+matambaka,Matambaka,300,,Local Pick,"Local fish choice for simple frying and grilling, with pricing taken from your attached list.",images/product-matambaka.png,100,FALSE

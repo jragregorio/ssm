@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Seafood Market</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.5/dist/driver.css">
   <style>
     :root {
       --bg: #f7fbfc;
@@ -275,6 +276,18 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1.25rem;
       align-items: stretch;
+    }
+
+    .product-grid-status {
+      grid-column: 1 / -1;
+      margin: 0;
+      padding: 1.5rem 0.25rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .product-grid-status.is-error {
+      color: #a94435;
     }
 
     .card {
@@ -1155,6 +1168,198 @@
       hyphens: auto;
     }
 
+    .about-tour-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.65rem 1.1rem;
+      min-height: 44px;
+      border: 1px solid rgba(21, 122, 138, 0.35);
+      border-radius: 999px;
+      background: #eef7f9;
+      color: var(--accent-dark);
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .about-tour-button:hover {
+      background: #e2f1f4;
+    }
+
+    .about-tour-hint {
+      margin-top: 0.55rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .about-tour-hint.is-error {
+      color: #a94435;
+    }
+
+    /* driver.js theme — larger type and tap targets for 40+ readability */
+    .driver-popover.ssm-tour-popover {
+      box-sizing: border-box !important;
+      display: block !important;
+      width: min(360px, calc(100vw - 1.5rem)) !important;
+      max-width: min(360px, calc(100vw - 1.5rem)) !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      height: fit-content !important;
+      max-height: none !important;
+      bottom: auto !important;
+      padding: 1.1rem 1.15rem 1rem !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 16px !important;
+      background: #fff !important;
+      color: var(--text) !important;
+      box-shadow: 0 12px 28px rgba(16, 70, 80, 0.18) !important;
+      overflow: visible !important;
+    }
+
+    .ssm-tour-popover .driver-popover-title {
+      position: relative !important;
+      z-index: 0 !important;
+      display: block !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      min-height: 0 !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 2.75rem 0 0 !important;
+      background: transparent !important;
+      font-size: 1.28rem !important;
+      font-weight: 700 !important;
+      line-height: 1.3 !important;
+      color: var(--text) !important;
+      flex: none !important;
+    }
+
+    .ssm-tour-popover .driver-popover-description {
+      display: block !important;
+      margin-top: 0.45rem !important;
+      margin-bottom: 0 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      background: transparent !important;
+      font-size: 1.08rem !important;
+      line-height: 1.5 !important;
+      color: var(--muted) !important;
+      flex: none !important;
+    }
+
+    .ssm-tour-popover .driver-popover-footer,
+    .driver-popover.ssm-tour-popover footer.driver-popover-footer {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin: 0.95rem 0 0 !important;
+      padding: 0 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      gap: 0.55rem;
+      flex: none !important;
+      border: 0 !important;
+      border-top: 0 !important;
+      text-align: left !important;
+      color: inherit !important;
+      font-size: inherit !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    .ssm-tour-popover .driver-popover-progress-text {
+      color: var(--muted) !important;
+      font-size: 0.98rem !important;
+      font-weight: 600 !important;
+      white-space: nowrap;
+      flex: none !important;
+    }
+
+    .ssm-tour-popover .driver-popover-navigation-btns {
+      display: flex !important;
+      flex-grow: 0 !important;
+      flex: none !important;
+      gap: 0.45rem;
+    }
+
+    .ssm-tour-popover .driver-popover-next-btn,
+    .ssm-tour-popover .driver-popover-done-btn {
+      background: var(--accent) !important;
+      color: #fff !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      min-height: 2.75rem !important;
+      padding: 0.65rem 1.15rem !important;
+      font-size: 1.02rem !important;
+      font-weight: 700 !important;
+      text-shadow: none !important;
+      line-height: 1.2 !important;
+    }
+
+    .ssm-tour-popover .driver-popover-prev-btn {
+      border-radius: 999px !important;
+      min-height: 2.75rem !important;
+      padding: 0.65rem 1rem !important;
+      font-size: 1.02rem !important;
+      font-weight: 600 !important;
+      color: var(--accent-dark) !important;
+      border: 1px solid var(--border) !important;
+      text-shadow: none !important;
+      background: #fff !important;
+    }
+
+    .ssm-tour-popover .driver-popover-close-btn {
+      all: unset !important;
+      position: absolute !important;
+      top: 0.55rem !important;
+      right: 0.5rem !important;
+      z-index: 20 !important;
+      box-sizing: border-box !important;
+      width: 2.4rem !important;
+      height: 2.4rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 999px !important;
+      background: #eef4f6 !important;
+      color: var(--text) !important;
+      font-size: 1.35rem !important;
+      font-weight: 600 !important;
+      line-height: 1 !important;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+    }
+
+    .ssm-tour-popover .driver-popover-close-btn:hover,
+    .ssm-tour-popover .driver-popover-close-btn:focus {
+      color: var(--accent-dark) !important;
+      background: #e2eef1 !important;
+    }
+
+    .ssm-tour-popover .driver-popover-next-btn:hover,
+    .ssm-tour-popover .driver-popover-done-btn:hover {
+      background: var(--accent-dark) !important;
+    }
+
+    /* driver.js sets overflow:hidden on parents of the active element;
+       the cart FAB is absolutely positioned outside a 0-height wrap and gets clipped. */
+    body.driver-active .tab-bar-fab-wrap,
+    body.driver-active .tab-bar-fab-wrap:has(.driver-active-element),
+    body.driver-active .mobile-tab-bar-items:has(.driver-active-element),
+    body.driver-active .mobile-tab-bar:has(.driver-active-element) {
+      overflow: visible !important;
+    }
+
+    /* Empty-cart checkout is disabled (opacity 0.6); keep tour spotlight readable. */
+    body.driver-active #checkout-button.ssm-tour-demo-checkout {
+      opacity: 1 !important;
+      cursor: default;
+    }
+
     body.about-modal-open {
       overflow: hidden;
     }
@@ -1683,156 +1888,8 @@
         </div>
 
         <div class="shop-layout">
-          <div class="product-grid">
-            <article class="card" data-product-name="Pompano">
-              <div class="card-image">
-                <img src="images/product-pompano.png" alt="Fresh pompano on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Best Seller</span>
-                <h3>Pompano</h3>
-                <p>Clean, mild-flavored whole fish that works well for steaming, frying, or simple home-style meals.</p>
-                <div class="price-row">
-                  <span class="price">PHP 340.00 / kilo</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Pompano" data-price="340.00" data-unit="/ kilo">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" hidden style="display: none;" data-product-name="Tilapia">
-              <div class="card-image">
-                <img src="images/product-tilapia.png" alt="Fresh tilapia on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Daily Catch</span>
-                <h3>Tilapia</h3>
-                <p>Budget-friendly everyday fish that is easy to fry, grill, or cook in familiar Filipino recipes.</p>
-                <div class="price-row">
-                  <span class="price">PHP 125.00</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Tilapia" data-price="125.00" data-unit="">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-product-name="Salmon">
-              <div class="card-image">
-                <img src="images/product-salmon.png" alt="Fresh salmon fillet on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Premium Cut</span>
-                <h3>Salmon</h3>
-                <p>Rich, premium salmon that is ideal for baking, pan-searing, or serving as a special family meal.</p>
-                <div class="price-row">
-                  <span class="price">PHP 600.00 / kilo</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Salmon" data-price="600.00" data-unit="/ kilo">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-product-name="Shrimp">
-              <div class="card-image">
-                <img src="images/product-shrimp.png" alt="Fresh shrimp on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Market Favorite</span>
-                <h3>Shrimp</h3>
-                <p>Fresh shrimp for stir-fry, butter garlic dishes, soups, and quick seafood platters at home.</p>
-                <div class="price-row">
-                  <span class="price">PHP 530.00 / kilo</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Shrimp" data-price="530.00" data-unit="/ kilo">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-product-name="Bangus">
-              <div class="card-image">
-                <img src="images/product-bangus.png" alt="Fresh bangus on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Home Favorite</span>
-                <h3>Bangus</h3>
-                <p>Classic milkfish option for grilling, frying, or everyday family recipes with familiar local flavor.</p>
-                <div class="price-row">
-                  <span class="price">PHP 200.00 / kilo</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Bangus" data-price="200.00" data-unit="/ kilo">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" data-product-name="Sugpo">
-              <div class="card-image">
-                <img src="images/product-sugpo.png" alt="Fresh sugpo prawns on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Large Prawns</span>
-                <h3>Sugpo</h3>
-                <p>Large prawns for grilling, buttered seafood plates, and special-occasion family meals.</p>
-                <div class="price-row">
-                  <span class="price">PHP 1,400.00</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Sugpo" data-price="1400.00" data-unit="">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" hidden style="display: none;" data-product-name="Tahong">
-              <div class="card-image">
-                <img src="images/product-tahong.png" alt="Fresh tahong mussels on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Shellfish</span>
-                <h3>Tahong</h3>
-                <p>Fresh mussels that are great for soups, steaming, or simple garlic-butter preparations.</p>
-                <div class="price-row">
-                  <span class="price">PHP 170.00</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Tahong" data-price="170.00" data-unit="">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" hidden style="display: none;" data-product-name="Hasa Hasa">
-              <div class="card-image">
-                <img src="images/product-hasa-hasa.png" alt="Fresh hasa hasa on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Daily Fish</span>
-                <h3>Hasa Hasa</h3>
-                <p>Versatile fish option for frying or stewing, added from your handwritten market list.</p>
-                <div class="price-row">
-                  <span class="price">PHP 350.00</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Hasa Hasa" data-price="350.00" data-unit="">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" hidden style="display: none;" data-product-name="Squid">
-              <div class="card-image">
-                <img src="images/product-squid.png" alt="Fresh squid on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Seafood Staple</span>
-                <h3>Squid</h3>
-                <p>Fresh squid for adobo, calamares, stuffing, or classic seafood dishes at home.</p>
-                <div class="price-row">
-                  <span class="price">PHP 450.00 / kilo</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Squid" data-price="450.00" data-unit="/ kilo">Add to Cart</button>
-                </div>
-              </div>
-            </article>
-
-            <article class="card" hidden style="display: none;" data-product-name="Matambaka">
-              <div class="card-image">
-                <img src="images/product-matambaka.png" alt="Fresh matambaka on ice" width="400" height="190" loading="lazy">
-              </div>
-              <div class="card-body">
-                <span class="eyebrow">Local Pick</span>
-                <h3>Matambaka</h3>
-                <p>Local fish choice for simple frying and grilling, with pricing taken from your attached list.</p>
-                <div class="price-row">
-                  <span class="price">PHP 300.00</span>
-                  <button class="mini-button add-to-cart" type="button" data-name="Matambaka" data-price="300.00" data-unit="">Add to Cart</button>
-                </div>
-              </div>
-            </article>
+          <div class="product-grid" id="product-grid" aria-live="polite">
+            <p class="product-grid-status">Loading today’s seafood picks…</p>
           </div>
         </div>
       </div>
@@ -1841,7 +1898,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.5.1</p>
+      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.7.1</p>
     </div>
   </footer>
 
@@ -1984,8 +2041,9 @@
         <br>
         <br>
         Order in a few taps, then choose what suits you best: doorstep delivery (exclusive for AHVA residents), self pick-up at 20 Toledo, or—if you live outside the community—your preferred courier service (e.g., Lalamove, Grab, etc.) for pick-up and delivery.
-   
       </p>
+      <button id="about-tour-button" class="about-tour-button" type="button">Take a quick tour</button>
+      <p id="about-tour-hint" class="about-tour-hint" hidden></p>
     </div>
   </div>
   <div id="delivery-modal-backdrop" class="delivery-modal-backdrop" aria-live="polite" aria-hidden="true">
@@ -2049,6 +2107,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.5/dist/driver.js.iife.js"></script>
   <script>
     const ORDER_ENDPOINT = "https://script.google.com/macros/s/AKfycby6gJaaUC1fb_9QRXxXMIYBInF2Qd6kSZ4f1XBV8aSjm7cjeW6p9sqQgdWhqzIuUqE/exec";
     const NTFY_TOPIC = "ssm_southseafoodmarket";
@@ -2060,7 +2119,8 @@
     const RATE_LIMIT_WINDOW_MS = 60 * 1000;
     const LAST_ORDER_TS_KEY = "ahsom-last-order-ts";
     const LAST_ORDER_SIGNATURE_KEY = "ahsom-last-order-signature";
-    const SITE_VERSION = "1.5.1";
+    const SITE_VERSION = "1.7.1";
+    const TOUR_SEEN_KEY = "ssm-tour-seen-v1";
 
     function isValidCartItem(item) {
       return (
@@ -2124,6 +2184,8 @@
     const aboutPopupTrigger = document.getElementById("about-popup-trigger");
     const aboutModalBackdrop = document.getElementById("about-modal-backdrop");
     const aboutModalClose = document.getElementById("about-modal-close");
+    const aboutTourButton = document.getElementById("about-tour-button");
+    const aboutTourHint = document.getElementById("about-tour-hint");
     const deliveryPopupTrigger = document.getElementById("delivery-popup-trigger");
     const deliveryModalBackdrop = document.getElementById("delivery-modal-backdrop");
     const deliveryModalClose = document.getElementById("delivery-modal-close");
@@ -2154,7 +2216,7 @@
     const customerAddressInput = document.getElementById("customer-address");
     const customerNotesInput = document.getElementById("customer-notes");
     const checkoutHoneypotInput = document.getElementById("checkout-website");
-    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+    const productGrid = document.getElementById("product-grid");
     let isSubmitting = false;
     let scrollToTopAfterOrderModalClose = false;
     const VIBER_GROUP_LINK =
@@ -2203,6 +2265,552 @@
     function setCheckoutButtonLabel(label) {
       getCheckoutButtons().forEach((button) => {
         button.textContent = label;
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatProductPrice(price, unit) {
+      const base = "PHP " + Number(price).toFixed(2);
+      return unit ? base + " " + unit : base;
+    }
+
+    function setProductGridStatus(message, isError) {
+      if (!productGrid) {
+        return;
+      }
+      productGrid.innerHTML =
+        '<p class="product-grid-status' + (isError ? " is-error" : "") + '">' + escapeHtml(message) + "</p>";
+    }
+
+    function renderProducts(products) {
+      if (!productGrid) {
+        return;
+      }
+
+      if (!products.length) {
+        setProductGridStatus("No seafood listings are available right now. Please check back soon.", false);
+        return;
+      }
+
+      productGrid.innerHTML = products
+        .map(function (product) {
+          const name = escapeHtml(product.name);
+          const eyebrow = escapeHtml(product.eyebrow || "Fresh Catch");
+          const description = escapeHtml(product.description || "");
+          const image = escapeHtml(product.image || "images/product-pompano.png");
+          const unit = product.unit || "";
+          const priceValue = Number(product.price).toFixed(2);
+          const priceLabel = escapeHtml(formatProductPrice(product.price, unit));
+          const alt = escapeHtml("Fresh " + product.name + " on ice");
+
+          return (
+            '<article class="card" data-product-name="' + name + '" data-product-id="' + escapeHtml(product.id) + '">' +
+              '<div class="card-image">' +
+                '<img src="' + image + '" alt="' + alt + '" width="400" height="190" loading="lazy">' +
+              "</div>" +
+              '<div class="card-body">' +
+                '<span class="eyebrow">' + eyebrow + "</span>" +
+                "<h3>" + name + "</h3>" +
+                "<p>" + description + "</p>" +
+                '<div class="price-row">' +
+                  '<span class="price">' + priceLabel + "</span>" +
+                  '<button class="mini-button add-to-cart" type="button" data-name="' + name + '" data-price="' + priceValue + '" data-unit="' + escapeHtml(unit) + '">Add to Cart</button>' +
+                "</div>" +
+              "</div>" +
+            "</article>"
+          );
+        })
+        .join("");
+    }
+
+    async function loadProducts() {
+      if (!productGrid) {
+        return;
+      }
+
+      if (!ORDER_ENDPOINT || ORDER_ENDPOINT.includes("PASTE_YOUR_GOOGLE_APPS_SCRIPT")) {
+        setProductGridStatus("Product catalog is not configured yet.", true);
+        return;
+      }
+
+      setProductGridStatus("Loading today’s seafood picks…", false);
+
+      try {
+        const response = await fetch(ORDER_ENDPOINT + "?action=products", {
+          method: "GET",
+          redirect: "follow"
+        });
+        const data = await response.json();
+
+        if (!data || !data.ok || !Array.isArray(data.products)) {
+          throw new Error((data && data.message) || "Unable to load products.");
+        }
+
+        renderProducts(data.products);
+      } catch (error) {
+        setProductGridStatus("Unable to load today’s menu right now. Please refresh and try again.", true);
+      } finally {
+        maybeAutoStartTour();
+      }
+    }
+
+    function hasSeenTour() {
+      try {
+        return localStorage.getItem(TOUR_SEEN_KEY) === "1";
+      } catch {
+        return false;
+      }
+    }
+
+    function markTourSeen() {
+      try {
+        localStorage.setItem(TOUR_SEEN_KEY, "1");
+      } catch {
+        /* ignore private mode */
+      }
+    }
+
+    function setAboutTourHint(message, isError) {
+      if (!aboutTourHint) {
+        return;
+      }
+      if (!message) {
+        aboutTourHint.hidden = true;
+        aboutTourHint.textContent = "";
+        aboutTourHint.className = "about-tour-hint";
+        return;
+      }
+      aboutTourHint.hidden = false;
+      aboutTourHint.textContent = message;
+      aboutTourHint.className = "about-tour-hint" + (isError ? " is-error" : "");
+    }
+
+    let activeTourDriver = null;
+    let promotedTourTarget = null;
+    let tourCheckoutPrevDisabled = null;
+
+    function restoreTourCheckoutButton() {
+      const el = document.getElementById("checkout-button");
+      if (!el) {
+        tourCheckoutPrevDisabled = null;
+        return;
+      }
+      el.classList.remove("ssm-tour-demo-checkout");
+      if (tourCheckoutPrevDisabled !== null) {
+        el.disabled = tourCheckoutPrevDisabled;
+        tourCheckoutPrevDisabled = null;
+      }
+    }
+
+    function prepareTourCheckoutButton() {
+      const el = document.getElementById("checkout-button");
+      if (!el) {
+        return null;
+      }
+      if (tourCheckoutPrevDisabled === null) {
+        tourCheckoutPrevDisabled = el.disabled;
+      }
+      el.disabled = false;
+      el.classList.add("ssm-tour-demo-checkout");
+      return el;
+    }
+
+    function restorePromotedTourTarget() {
+      if (!promotedTourTarget) {
+        return;
+      }
+      const el = promotedTourTarget;
+      const prev = el.dataset.tourPrevStyle;
+      if (prev) {
+        el.setAttribute("style", prev);
+      } else {
+        el.removeAttribute("style");
+      }
+      delete el.dataset.tourPrevStyle;
+      delete el.dataset.tourPromoted;
+      promotedTourTarget = null;
+    }
+
+    function promoteTourTarget(el) {
+      if (!el) {
+        return;
+      }
+      restorePromotedTourTarget();
+      /* Measure visual box first (includes translateX(-50%)), then freeze without
+         animating transform — otherwise left + leftover translate drifts the FAB. */
+      const rect = el.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) {
+        return;
+      }
+      if (rect.top > window.innerHeight - 8 || rect.bottom < 8) {
+        return;
+      }
+      el.dataset.tourPromoted = "1";
+      el.dataset.tourPrevStyle = el.getAttribute("style") || "";
+      const left = Math.round(rect.left);
+      const top = Math.round(rect.top);
+      el.style.setProperty("transition", "none", "important");
+      el.style.setProperty("position", "fixed", "important");
+      el.style.setProperty("left", left + "px", "important");
+      el.style.setProperty("top", top + "px", "important");
+      el.style.setProperty("width", Math.round(rect.width) + "px", "important");
+      el.style.setProperty("height", Math.round(rect.height) + "px", "important");
+      el.style.setProperty("right", "auto", "important");
+      el.style.setProperty("bottom", "auto", "important");
+      el.style.setProperty("transform", "none", "important");
+      el.style.setProperty("margin", "0", "important");
+      el.style.setProperty("z-index", "10001", "important");
+      el.style.setProperty("opacity", "1", "important");
+      promotedTourTarget = el;
+      requestAnimationFrame(function () {
+        if (promotedTourTarget !== el) {
+          return;
+        }
+        el.style.setProperty("transition", "none", "important");
+        el.style.setProperty("left", left + "px", "important");
+        el.style.setProperty("top", top + "px", "important");
+        el.style.setProperty("transform", "none", "important");
+      });
+    }
+
+    function maybePromoteActiveTourTarget(element) {
+      if (!element || !element.id) {
+        restorePromotedTourTarget();
+        return;
+      }
+      /* Checkout stays in-flow under the overlay hole; promoting while the cart
+         sheet animates locked it below the viewport (top ~970). */
+      if (element.id === "bottom-cart-fab") {
+        promoteTourTarget(element);
+        return;
+      }
+      restorePromotedTourTarget();
+    }
+
+    function compactTourPopover(popover) {
+      const wrapper = (popover && popover.wrapper) || document.querySelector(".driver-popover.ssm-tour-popover");
+      if (!wrapper) {
+        return;
+      }
+
+      wrapper.style.setProperty("display", "block", "important");
+      wrapper.style.setProperty("height", "auto", "important");
+      wrapper.style.setProperty("min-height", "0", "important");
+      wrapper.style.setProperty("max-height", "none", "important");
+      /* Do NOT force bottom:auto — that breaks driver.js side:"bottom" placement. */
+
+      const closeBtn = wrapper.querySelector(".driver-popover-close-btn");
+      const title = wrapper.querySelector(".driver-popover-title");
+      const description = wrapper.querySelector(".driver-popover-description");
+      const footer = wrapper.querySelector(".driver-popover-footer");
+
+      if (closeBtn) {
+        wrapper.appendChild(closeBtn);
+        closeBtn.style.setProperty("position", "absolute", "important");
+        closeBtn.style.setProperty("top", "0.55rem", "important");
+        closeBtn.style.setProperty("right", "0.5rem", "important");
+        closeBtn.style.setProperty("z-index", "30", "important");
+      }
+
+      if (title) {
+        title.style.setProperty("padding-right", "2.75rem", "important");
+        title.style.setProperty("background", "transparent", "important");
+        title.style.setProperty("min-height", "0", "important");
+        title.style.setProperty("height", "auto", "important");
+        title.style.setProperty("position", "relative", "important");
+        title.style.setProperty("z-index", "0", "important");
+      }
+
+      [description, footer].forEach(function (node) {
+        if (!node) {
+          return;
+        }
+        node.style.setProperty("height", "auto", "important");
+        node.style.setProperty("min-height", "0", "important");
+        node.style.setProperty("flex", "none", "important");
+      });
+
+      if (footer) {
+        footer.style.setProperty("padding", "0", "important");
+        footer.style.setProperty("margin-top", "0.95rem", "important");
+        footer.style.setProperty("border", "0", "important");
+      }
+
+      clampTourPopoverOnScreen(wrapper);
+    }
+
+    function clampTourPopoverOnScreen(wrapper) {
+      const node = wrapper || document.querySelector(".driver-popover.ssm-tour-popover");
+      if (!node) {
+        return;
+      }
+      const rect = node.getBoundingClientRect();
+      const margin = 12;
+      if (rect.height === 0) {
+        return;
+      }
+      if (rect.top < margin) {
+        node.style.setProperty("top", margin + "px", "important");
+        node.style.setProperty("bottom", "auto", "important");
+      } else if (rect.bottom > window.innerHeight - margin) {
+        const nextTop = Math.max(margin, window.innerHeight - rect.height - margin);
+        node.style.setProperty("top", nextTop + "px", "important");
+        node.style.setProperty("bottom", "auto", "important");
+      }
+    }
+
+    function buildTourSteps() {
+      const addButton = document.querySelector(".add-to-cart");
+      const addTarget = addButton || "#product-grid";
+      const addDescription = addButton
+        ? "Tap Add to Cart on any seafood listing to put it in your bag. You can change the amount later in the cart."
+        : "Seafood listings appear here. When the menu loads, tap Add to Cart on any item to put it in your bag.";
+
+      return [
+        {
+          element: ".mobile-tab-bar-items",
+          popover: {
+            title: "Bottom menu",
+            description:
+              "Use this bar to move around the shop: Shop, Delivery, Cart in the center, Contact, and About.",
+            side: "top",
+            align: "center"
+          }
+        },
+        {
+          element: "#bottom-tab-shop",
+          popover: {
+            title: "Shop",
+            description: "Opens Featured Seafood so you can browse today’s picks and prices.",
+            side: "top",
+            align: "start"
+          }
+        },
+        {
+          element: "#bottom-tab-delivery",
+          popover: {
+            title: "Delivery",
+            description:
+              "Opens delivery options: doorstep delivery for AHVA residents, or self pick-up at 20 Toledo.",
+            side: "top",
+            align: "start"
+          }
+        },
+        {
+          element: "#bottom-tab-contact",
+          popover: {
+            title: "Contact",
+            description: "Opens ways to reach us — scan the Viber QR or call/text the mobile number.",
+            side: "top",
+            align: "end"
+          }
+        },
+        {
+          element: "#bottom-tab-about",
+          popover: {
+            title: "About",
+            description: "Learn a bit about South Seafood Market and how ordering works.",
+            side: "top",
+            align: "end"
+          }
+        },
+        {
+          element: "#bottom-cart-fab",
+          popover: {
+            title: "Your cart",
+            description:
+              "Tap the center cart button to open your bag. The small number shows how many items you have.",
+            side: "top",
+            align: "center"
+          },
+          onHighlightStarted: function () {
+            restoreTourCheckoutButton();
+            setCartOpen(false);
+          }
+        },
+        {
+          element: "#checkout-button",
+          popover: {
+            title: "Cart view",
+            description:
+              "Check items and amounts here. Tap Send order request when ready, or Back to shop to keep browsing. On phones you can also swipe the handle down to close.",
+            side: "top",
+            align: "center"
+          },
+          onHighlightStarted: function () {
+            restorePromotedTourTarget();
+            setCartOpen(true);
+            const panel = document.getElementById("cart-panel");
+            let finished = false;
+            const finishCartStep = function () {
+              if (finished) {
+                return;
+              }
+              finished = true;
+              prepareTourCheckoutButton();
+              if (activeTourDriver) {
+                try {
+                  activeTourDriver.refresh();
+                } catch {
+                  /* ignore */
+                }
+              }
+              compactTourPopover();
+              clampTourPopoverOnScreen();
+            };
+            if (panel) {
+              panel.addEventListener("transitionend", function onCartOpenEnd(event) {
+                if (event.propertyName && event.propertyName !== "transform") {
+                  return;
+                }
+                panel.removeEventListener("transitionend", onCartOpenEnd);
+                finishCartStep();
+              });
+            }
+            setTimeout(finishCartStep, 400);
+          }
+        },
+        {
+          element: addTarget,
+          popover: {
+            title: "Add to cart",
+            description: addDescription,
+            side: "top",
+            align: "center"
+          },
+          onHighlightStarted: function () {
+            restorePromotedTourTarget();
+            restoreTourCheckoutButton();
+            setCartOpen(false);
+            setTimeout(function () {
+              if (activeTourDriver) {
+                try {
+                  activeTourDriver.refresh();
+                } catch {
+                  /* ignore */
+                }
+              }
+            }, 120);
+          }
+        }
+      ];
+    }
+
+    function startAppTour(options) {
+      const force = Boolean(options && options.force);
+
+      if (!isMobileCartView()) {
+        return false;
+      }
+
+      const driverFactory = window.driver && window.driver.js && window.driver.js.driver;
+      if (typeof driverFactory !== "function") {
+        return false;
+      }
+
+      if (!force && hasSeenTour()) {
+        return false;
+      }
+
+      if (activeTourDriver) {
+        try {
+          activeTourDriver.destroy();
+        } catch {
+          /* ignore */
+        }
+        activeTourDriver = null;
+      }
+
+      hideAboutModal();
+      hideContactModal();
+      hideDeliveryModal();
+      setCartOpen(false);
+      setActiveBottomTab(null);
+
+      const driverObj = driverFactory({
+        showProgress: true,
+        animate: true,
+        allowClose: true,
+        smoothScroll: false,
+        overlayOpacity: 0.55,
+        stagePadding: 6,
+        stageRadius: 12,
+        popoverOffset: 12,
+        popoverClass: "ssm-tour-popover",
+        nextBtnText: "Next",
+        prevBtnText: "Back",
+        doneBtnText: "Done",
+        onPopoverRender: function (popover) {
+          compactTourPopover(popover);
+          requestAnimationFrame(function () {
+            compactTourPopover(popover);
+          });
+        },
+        onHighlighted: function (element) {
+          maybePromoteActiveTourTarget(element);
+          requestAnimationFrame(function () {
+            if (activeTourDriver) {
+              try {
+                activeTourDriver.refresh();
+              } catch {
+                /* ignore */
+              }
+            }
+            compactTourPopover();
+            setTimeout(function () {
+              compactTourPopover();
+              clampTourPopoverOnScreen();
+            }, 50);
+          });
+        },
+        onDestroyStarted: function () {
+          restorePromotedTourTarget();
+          restoreTourCheckoutButton();
+          if (!driverObj) {
+            return;
+          }
+          setCartOpen(false);
+          markTourSeen();
+          activeTourDriver = null;
+          driverObj.destroy();
+        },
+        steps: buildTourSteps()
+      });
+
+      activeTourDriver = driverObj;
+
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          driverObj.drive();
+          setTimeout(function () {
+            try {
+              driverObj.refresh();
+            } catch {
+              /* ignore */
+            }
+          }, 80);
+        }, 120);
+      });
+
+      return true;
+    }
+
+    function maybeAutoStartTour() {
+      if (!isMobileCartView() || hasSeenTour()) {
+        return;
+      }
+      requestAnimationFrame(function () {
+        setTimeout(function () {
+          startAppTour({ force: false });
+        }, 450);
       });
     }
 
@@ -2331,6 +2939,7 @@
         hideContactModal();
         hideDeliveryModal();
         setActiveBottomTab("about");
+        setAboutTourHint("");
         showAboutModal();
         requestAnimationFrame(() => aboutModalClose.focus());
       };
@@ -2350,6 +2959,20 @@
           setActiveBottomTab(null);
         }
       });
+
+      if (aboutTourButton) {
+        aboutTourButton.addEventListener("click", () => {
+          if (!isMobileCartView()) {
+            setAboutTourHint("The guided tour is made for the phone layout. Open this site on a phone (or narrow the window) and try again.", true);
+            return;
+          }
+          setAboutTourHint("");
+          const started = startAppTour({ force: true });
+          if (!started) {
+            setAboutTourHint("Unable to start the tour right now. Please refresh and try again.", true);
+          }
+        });
+      }
     }
 
     function initBottomNav() {
@@ -2701,11 +3324,20 @@
       adjustCartLineQuantity(name, delta);
     });
 
-    addToCartButtons.forEach((button) => {
-      button.addEventListener("click", () => {
+    if (productGrid) {
+      productGrid.addEventListener("click", (event) => {
+        const button = event.target.closest(".add-to-cart");
+        if (!button || isSubmitting) {
+          return;
+        }
+
         const name = button.dataset.name;
         const price = Number(button.dataset.price);
-        const unit = button.dataset.unit;
+        const unit = button.dataset.unit || "";
+        if (!name || !Number.isFinite(price)) {
+          return;
+        }
+
         const existingItem = cart.find((item) => item.name === name);
 
         if (existingItem) {
@@ -2716,7 +3348,7 @@
 
         renderCart();
       });
-    });
+    }
 
     desktopCartToggle.addEventListener("click", () => {
       setCartOpen(!document.body.classList.contains("cart-open"));
@@ -2943,6 +3575,7 @@
     initAboutPopup();
     initBottomNav();
     initCartMobileDismiss();
+    loadProducts();
 
     const footerCredit = document.getElementById("footer-credit");
     if (footerCredit) {
