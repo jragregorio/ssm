@@ -1839,7 +1839,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-credit">Created by JRAG 2026 • v1.3.0</p>
+      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.4.0</p>
     </div>
   </footer>
 
@@ -2058,6 +2058,7 @@
     const RATE_LIMIT_WINDOW_MS = 60 * 1000;
     const LAST_ORDER_TS_KEY = "ahsom-last-order-ts";
     const LAST_ORDER_SIGNATURE_KEY = "ahsom-last-order-signature";
+    const SITE_VERSION = "1.4.0";
 
     function isValidCartItem(item) {
       return (
@@ -2940,6 +2941,12 @@
     initAboutPopup();
     initBottomNav();
     initCartMobileDismiss();
+
+    const footerCredit = document.getElementById("footer-credit");
+    if (footerCredit) {
+      footerCredit.textContent = "Created by JRAG 2026 • v" + SITE_VERSION;
+    }
+
     renderCart();
   </script>
 </body>

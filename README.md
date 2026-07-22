@@ -36,6 +36,19 @@ If this repo is published with GitHub Pages from the default branch and root (or
 
 This project **does not** process card or online wallet payments. It only captures order requests and sends them to your sheet for follow-up.
 
+## Changelog
+
+### v1.4.0
+
+- Mobile bottom navigation with centered cart button, white bordered bar, and larger tap targets for easier use on phones
+- Horizontal product cards and simplified mobile header (replaced hamburger drawer)
+- Cart sheet: swipe-down drag handle, themed scrollbar, and clearer actions — **Send order request**, **Back to shop**, and **Remove all items** (with confirmation)
+- Desktop layout unchanged above 860px width
+
+### v1.3.0
+
+- Order notifications via ntfy and lightweight order hardening checks
+
 ---
 
 For sheet columns, status suggestions, and upgrading an existing **Orders** tab, see **[ORDER_SETUP.md](ORDER_SETUP.md)**.
