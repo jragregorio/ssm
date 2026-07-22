@@ -38,6 +38,10 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.5.1
+
+- About popup body text is justified for a cleaner, more even reading layout
+
 ### v1.5.0
 
 - Mobile home page goes straight to **Featured Seafood** (hero hidden on phones)
