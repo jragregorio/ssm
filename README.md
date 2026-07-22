@@ -42,6 +42,10 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.2
+
+- Skeleton product cards and clearer loading label while the catalog loads from Sheets
+
 ### v1.7.1
 
 - Larger guided-tour popovers, text, and buttons for easier reading (40+ friendly)
