@@ -38,6 +38,12 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.5.0
+
+- Mobile home page goes straight to **Featured Seafood** (hero hidden on phones)
+- Larger full-width **Add to Cart** buttons on product cards for easier tapping
+- **Remove all items** in cart: full-width centered pill with a larger tap target (still destructive styling with confirmation)
+
 ### v1.4.0
 
 - Mobile bottom navigation with centered cart button, white bordered bar, and larger tap targets for easier use on phones

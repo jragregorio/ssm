@@ -592,28 +592,38 @@
     }
 
     .cart-clear-link {
-      display: inline-block;
-      margin-top: 0.55rem;
-      padding: 0.2rem 0;
-      border: 0;
-      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.55rem 1.1rem;
+      min-height: 44px;
+      border: 1px solid rgba(169, 68, 53, 0.42);
+      border-radius: 999px;
+      background: #fff8f7;
       color: #a94435;
       font: inherit;
-      font-size: 0.88rem;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: underline;
-      text-underline-offset: 0.15em;
+      text-underline-offset: 0.12em;
       cursor: pointer;
+      transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
     }
 
     .cart-clear-link:hover {
       color: #8b2d1f;
+      background: #ffeeec;
+      border-color: rgba(139, 45, 31, 0.5);
     }
 
     .cart-clear-link:focus-visible {
       outline: 2px solid #a94435;
       outline-offset: 2px;
-      border-radius: 4px;
     }
 
     .cart-clear-link:disabled {
@@ -1269,27 +1279,11 @@
       }
 
       .hero {
-        padding: 2rem 0 1.25rem;
-        text-align: left;
-      }
-
-      .hero h1 {
-        font-size: clamp(1.55rem, 6vw, 2rem);
-        margin-bottom: 0.65rem;
-      }
-
-      .hero p {
-        margin-left: 0;
-        font-size: 0.92rem;
-        margin-bottom: 0;
-      }
-
-      .hero .button {
         display: none;
       }
 
       .products {
-        padding: 0.5rem 0 1.5rem;
+        padding: 0.75rem 0 1.5rem;
       }
 
       .card {
@@ -1328,17 +1322,22 @@
       }
 
       .price-row {
-        flex-wrap: wrap;
-        gap: 0.45rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.55rem;
+        margin-top: 0.5rem;
       }
 
       .price {
-        font-size: 0.88rem;
+        font-size: 0.95rem;
       }
 
       .mini-button {
-        padding: 0.45rem 0.75rem;
-        font-size: 0.78rem;
+        width: 100%;
+        min-height: 48px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
       }
 
       main,
@@ -1676,7 +1675,7 @@
         <div class="section-title">
           <div>
             <h2>Featured Seafood</h2>
-            <p>Fresh market selections based on your current seafood price list.</p>
+            <p>Today&rsquo;s picks — prices per kilo unless noted.</p>
           </div>
         </div>
 
@@ -1839,7 +1838,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.4.0</p>
+      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.5.0</p>
     </div>
   </footer>
 
@@ -2058,7 +2057,7 @@
     const RATE_LIMIT_WINDOW_MS = 60 * 1000;
     const LAST_ORDER_TS_KEY = "ahsom-last-order-ts";
     const LAST_ORDER_SIGNATURE_KEY = "ahsom-last-order-signature";
-    const SITE_VERSION = "1.4.0";
+    const SITE_VERSION = "1.5.0";
 
     function isValidCartItem(item) {
       return (
