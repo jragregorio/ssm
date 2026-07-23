@@ -1475,6 +1475,131 @@
       }
     }
 
+    /* Demo social-proof purchase toast */
+    .social-proof-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 1rem;
+      z-index: 85;
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      width: min(22.5rem, calc(100vw - 2rem));
+      padding: 0.7rem 2.35rem 0.7rem 0.7rem;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(16, 70, 80, 0.16);
+      color: var(--text);
+      opacity: 0;
+      transform: translate(-50%, 0.85rem);
+      pointer-events: none;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+    }
+
+    .social-proof-toast.is-visible {
+      display: flex;
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+
+    .social-proof-toast.is-hiding {
+      opacity: 0;
+      transform: translate(-50%, 0.85rem);
+      pointer-events: none;
+    }
+
+    .social-proof-media {
+      flex: 0 0 3.35rem;
+      width: 3.35rem;
+      height: 3.35rem;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px rgba(16, 70, 80, 0.14);
+      background: linear-gradient(135deg, #d7edf2, #edf7fa);
+    }
+
+    .social-proof-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .social-proof-body {
+      min-width: 0;
+      flex: 1 1 auto;
+      padding-right: 0.15rem;
+    }
+
+    .social-proof-text {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .social-proof-product {
+      color: var(--accent-dark);
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+      font-weight: 700;
+      cursor: pointer;
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .social-proof-product:hover,
+    .social-proof-product:focus-visible {
+      color: var(--accent);
+    }
+
+    .social-proof-meta {
+      margin: 0.35rem 0 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .social-proof-close {
+      position: absolute;
+      top: 0.35rem;
+      right: 0.35rem;
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      border-radius: 999px;
+      background: transparent;
+      color: #7a9097;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .social-proof-close:hover,
+    .social-proof-close:focus-visible {
+      color: var(--text);
+      background: #eef4f6;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .social-proof-toast {
+        transition: opacity 0.15s ease;
+        transform: translate(-50%, 0);
+      }
+
+      .social-proof-toast.is-hiding {
+        transform: translate(-50%, 0);
+      }
+    }
+
     /* Mobile app shell — hidden on desktop */
     .mobile-tab-bar {
       display: none;
@@ -1527,7 +1652,8 @@
     @media (max-width: 860px) {
       :root {
         --mobile-header-height: 4.25rem;
-        --mobile-tab-bar-height: 6rem;
+        --mobile-tab-bar-height: 4.65rem;
+        --mobile-tab-bar-inset: 0.85rem;
         --mobile-nav-top: var(--mobile-header-height);
       }
 
@@ -1693,7 +1819,9 @@
 
       main,
       footer {
-        padding-bottom: calc(var(--mobile-tab-bar-height) + env(safe-area-inset-bottom, 0px) + 0.75rem);
+        padding-bottom: calc(
+          var(--mobile-tab-bar-height) + var(--mobile-tab-bar-inset) + env(safe-area-inset-bottom, 0px) + 1rem
+        );
       }
 
       .cart-indicator {
@@ -1703,66 +1831,79 @@
       .mobile-tab-bar {
         display: block;
         position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        left: var(--mobile-tab-bar-inset);
+        right: var(--mobile-tab-bar-inset);
+        bottom: calc(var(--mobile-tab-bar-inset) + env(safe-area-inset-bottom, 0px));
         z-index: 90;
-        padding-bottom: env(safe-area-inset-bottom, 0px);
+        padding-bottom: 0;
         pointer-events: none;
       }
 
-      .mobile-tab-bar-bg {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: calc(var(--mobile-tab-bar-height) + env(safe-area-inset-bottom, 0px));
-        color: var(--surface);
-        border-top: 1px solid var(--border);
-        box-shadow: 0 -6px 20px rgba(16, 70, 80, 0.08);
-        pointer-events: auto;
+      .social-proof-toast {
+        left: 50%;
+        bottom: calc(
+          var(--mobile-tab-bar-height) + var(--mobile-tab-bar-inset) + env(safe-area-inset-bottom, 0px) + 0.85rem
+        );
+        width: min(20.5rem, calc(100vw - 1.7rem));
+        padding: 0.75rem 2.4rem 0.75rem 0.75rem;
       }
 
-      .mobile-tab-bar-bg svg {
-        display: block;
-        width: 100%;
-        height: 100%;
+      .social-proof-text {
+        font-size: 1.02rem;
+      }
+
+      .social-proof-meta {
+        font-size: 0.82rem;
+      }
+
+      /* Floating pill demo — scoop background unused */
+      .mobile-tab-bar-bg {
+        display: none;
       }
 
       .mobile-tab-bar-items {
         position: relative;
         display: grid;
-        grid-template-columns: 1fr 1fr 5.75rem 1fr 1fr;
-        align-items: end;
-        height: var(--mobile-tab-bar-height);
-        padding: 0 0.25rem 0.5rem;
+        grid-template-columns: 1fr 1fr auto 1fr 1fr;
+        align-items: center;
+        gap: 0.15rem;
+        min-height: var(--mobile-tab-bar-height);
+        height: auto;
+        padding: 0.4rem 0.45rem;
         pointer-events: auto;
+        background: #fff;
+        border: 1px solid rgba(216, 231, 235, 0.95);
+        border-radius: 999px;
+        box-shadow:
+          0 10px 28px rgba(16, 70, 80, 0.14),
+          0 2px 8px rgba(16, 70, 80, 0.06);
       }
 
       .tab-item {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
-        gap: 0.25rem;
-        min-height: 53px;
-        min-width: 53px;
-        padding: 0.3rem 0.15rem;
+        justify-content: center;
+        gap: 0.15rem;
+        min-height: 3.35rem;
+        min-width: 0;
+        padding: 0.35rem 0.2rem;
         border: 0;
+        border-radius: 999px;
         background: transparent;
-        color: var(--muted);
+        color: #6a8188;
         font: inherit;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
         text-decoration: none;
         cursor: pointer;
-        transition: color 0.15s ease;
+        transition: color 0.15s ease, background 0.15s ease;
       }
 
       .tab-item svg {
-        width: 1.62rem;
-        height: 1.62rem;
+        width: 1.4rem;
+        height: 1.4rem;
         display: block;
       }
 
@@ -1774,39 +1915,45 @@
       .tab-item:focus-visible {
         outline: 2px solid var(--accent);
         outline-offset: 2px;
-        border-radius: 8px;
       }
 
       .tab-item.is-active {
-        color: var(--accent-dark);
+        color: #fff;
+        background: var(--accent);
+        box-shadow: 0 4px 12px rgba(15, 94, 105, 0.28);
+      }
+
+      .tab-item.is-active:hover,
+      .tab-item.is-active:focus-visible {
+        color: #fff;
+        background: var(--accent-dark);
       }
 
       .tab-bar-fab-wrap {
         position: relative;
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
+        width: 3.55rem;
         pointer-events: none;
       }
 
       .tab-bar-fab {
-        position: absolute;
-        bottom: 1.55rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 5.1rem;
-        height: 5.1rem;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 3.35rem;
+        height: 3.35rem;
         border-radius: 999px;
-        border: 3px solid var(--surface);
+        border: 0;
         background: var(--accent);
         color: #fff;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        box-shadow:
-          0 8px 24px rgba(15, 94, 105, 0.38),
-          0 3px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 14px rgba(15, 94, 105, 0.3);
         pointer-events: auto;
         transition:
           background 0.15s ease,
@@ -1815,8 +1962,8 @@
       }
 
       .tab-bar-fab svg {
-        width: 2rem;
-        height: 2rem;
+        width: 1.55rem;
+        height: 1.55rem;
         display: block;
       }
 
@@ -1830,23 +1977,21 @@
       }
 
       .tab-bar-fab.is-active {
-        background: #1a8a9a;
-        box-shadow:
-          0 10px 28px rgba(15, 94, 105, 0.42),
-          0 3px 10px rgba(0, 0, 0, 0.12);
+        background: var(--accent-dark);
+        box-shadow: 0 6px 16px rgba(15, 94, 105, 0.36);
       }
 
       .tab-bar-fab-badge {
         position: absolute;
-        top: -2px;
-        right: -2px;
-        min-width: 1.45rem;
-        height: 1.45rem;
-        padding: 0 0.3rem;
+        top: -0.15rem;
+        right: -0.15rem;
+        min-width: 1.3rem;
+        height: 1.3rem;
+        padding: 0 0.25rem;
         border-radius: 999px;
         background: #fff;
         color: var(--accent-dark);
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         display: grid;
         place-items: center;
@@ -2080,7 +2225,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.7.2</p>
+      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.7.3</p>
     </div>
   </footer>
 
@@ -2133,6 +2278,25 @@
       </button>
     </div>
   </nav>
+
+  <aside
+    id="social-proof-toast"
+    class="social-proof-toast"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+    aria-hidden="true"
+    hidden
+  >
+    <div class="social-proof-media">
+      <img id="social-proof-image" src="" alt="" width="64" height="64">
+    </div>
+    <div class="social-proof-body">
+      <p id="social-proof-text" class="social-proof-text"></p>
+      <p id="social-proof-meta" class="social-proof-meta"></p>
+    </div>
+    <button id="social-proof-close" class="social-proof-close" type="button" aria-label="Dismiss notification">×</button>
+  </aside>
 
   <div class="cart-panel-anchor">
     <aside id="cart-panel" class="cart-panel" aria-label="Shopping cart">
@@ -2301,7 +2465,7 @@
     const RATE_LIMIT_WINDOW_MS = 60 * 1000;
     const LAST_ORDER_TS_KEY = "ahsom-last-order-ts";
     const LAST_ORDER_SIGNATURE_KEY = "ahsom-last-order-signature";
-    const SITE_VERSION = "1.7.2";
+    const SITE_VERSION = "1.7.3";
     const TOUR_SEEN_KEY = "ssm-tour-seen-v1";
 
     function isValidCartItem(item) {
@@ -3110,6 +3274,249 @@
       });
     }
 
+    function initSocialProofToast() {
+      const toast = document.getElementById("social-proof-toast");
+      const imageEl = document.getElementById("social-proof-image");
+      const textEl = document.getElementById("social-proof-text");
+      const metaEl = document.getElementById("social-proof-meta");
+      const closeBtn = document.getElementById("social-proof-close");
+      if (!toast || !imageEl || !textEl || !metaEl || !closeBtn) {
+        return;
+      }
+
+      /* Curated demo purchases only — not live Orders data. */
+      const demos = [
+        {
+          name: "Maria",
+          place: "Alabang Hills",
+          product: "Pompano",
+          image: "images/product-pompano.png",
+          when: "2 hours ago"
+        },
+        {
+          name: "Raphael",
+          place: "AHVA",
+          product: "Pompano",
+          image: "images/product-pompano.png",
+          when: "45 minutes ago"
+        },
+        {
+          name: "Ana",
+          place: "Quezon City",
+          product: "Bangus",
+          image: "images/product-bangus.png",
+          when: "6 hours ago"
+        },
+        {
+          name: "Rico",
+          place: "Muntinlupa",
+          product: "Bangus",
+          image: "images/product-bangus.png",
+          when: "1 hour ago"
+        },
+        {
+          name: "Raymond",
+          place: "Alabang Hills",
+          product: "Salmon",
+          image: "images/product-salmon.png",
+          when: "3 hours ago"
+        },
+        {
+          name: "Beatrice",
+          place: "Las Piñas",
+          product: "Salmon",
+          image: "images/product-salmon.png",
+          when: "20 minutes ago"
+        }
+      ];
+
+      const SHOW_MS = 4500;
+      const GAP_MS_MIN = 10000;
+      const GAP_MS_MAX = 20000;
+      const FIRST_DELAY_MS = 4500;
+      const BLOCK_RETRY_MS = 2000;
+
+      let order = demos.map(function (_, index) {
+        return index;
+      });
+      let cursor = 0;
+      let visible = false;
+      let hideTimer = null;
+      let scheduleTimer = null;
+      let reducedMotion = false;
+
+      try {
+        reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      } catch {
+        reducedMotion = false;
+      }
+
+      function shuffleOrder() {
+        for (let i = order.length - 1; i > 0; i -= 1) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const tmp = order[i];
+          order[i] = order[j];
+          order[j] = tmp;
+        }
+        cursor = 0;
+      }
+
+      function nextGapMs() {
+        return GAP_MS_MIN + Math.floor(Math.random() * (GAP_MS_MAX - GAP_MS_MIN + 1));
+      }
+
+      function isBlocked() {
+        const body = document.body;
+        return (
+          body.classList.contains("cart-open") ||
+          body.classList.contains("about-modal-open") ||
+          body.classList.contains("contact-modal-open") ||
+          body.classList.contains("delivery-modal-open") ||
+          body.classList.contains("order-modal-open") ||
+          body.classList.contains("driver-active")
+        );
+      }
+
+      function clearHideTimer() {
+        if (hideTimer) {
+          clearTimeout(hideTimer);
+          hideTimer = null;
+        }
+      }
+
+      function clearScheduleTimer() {
+        if (scheduleTimer) {
+          clearTimeout(scheduleTimer);
+          scheduleTimer = null;
+        }
+      }
+
+      function schedule(delayMs) {
+        clearScheduleTimer();
+        scheduleTimer = setTimeout(function () {
+          scheduleTimer = null;
+          tryShow();
+        }, delayMs);
+      }
+
+      function hideToast(immediate) {
+        clearHideTimer();
+        if (!visible && !toast.classList.contains("is-visible")) {
+          toast.hidden = true;
+          toast.setAttribute("aria-hidden", "true");
+          toast.classList.remove("is-visible", "is-hiding");
+          return;
+        }
+        visible = false;
+        if (immediate || reducedMotion) {
+          toast.classList.remove("is-visible", "is-hiding");
+          toast.hidden = true;
+          toast.setAttribute("aria-hidden", "true");
+          return;
+        }
+        toast.classList.add("is-hiding");
+        setTimeout(function () {
+          toast.classList.remove("is-visible", "is-hiding");
+          toast.hidden = true;
+          toast.setAttribute("aria-hidden", "true");
+        }, 280);
+      }
+
+      function focusProduct(productName) {
+        const cards = document.querySelectorAll("#product-grid .card[data-product-name]");
+        let match = null;
+        for (let i = 0; i < cards.length; i += 1) {
+          if ((cards[i].getAttribute("data-product-name") || "").toLowerCase() === productName.toLowerCase()) {
+            match = cards[i];
+            break;
+          }
+        }
+        if (!match) {
+          const section = document.getElementById("products");
+          if (section) {
+            section.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+          }
+          return;
+        }
+        match.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
+      }
+
+      function renderDemo(demo) {
+        imageEl.src = demo.image;
+        imageEl.alt = demo.product;
+        textEl.innerHTML =
+          escapeHtml(demo.name) +
+          " from " +
+          escapeHtml(demo.place) +
+          " has recently purchased " +
+          '<button class="social-proof-product" type="button" data-product="' +
+          escapeHtml(demo.product) +
+          '">' +
+          escapeHtml(demo.product) +
+          ".</button>";
+        metaEl.textContent = demo.when;
+      }
+
+      function tryShow() {
+        if (document.hidden || isBlocked()) {
+          schedule(BLOCK_RETRY_MS);
+          return;
+        }
+        if (cursor >= order.length) {
+          shuffleOrder();
+        }
+        const demo = demos[order[cursor]];
+        cursor += 1;
+        renderDemo(demo);
+        toast.hidden = false;
+        toast.setAttribute("aria-hidden", "false");
+        toast.classList.remove("is-hiding");
+        /* Force reflow so the enter transition runs reliably. */
+        void toast.offsetWidth;
+        toast.classList.add("is-visible");
+        visible = true;
+        clearHideTimer();
+        hideTimer = setTimeout(function () {
+          hideTimer = null;
+          hideToast(false);
+          schedule(nextGapMs());
+        }, SHOW_MS);
+      }
+
+      closeBtn.addEventListener("click", function () {
+        hideToast(false);
+        schedule(nextGapMs());
+      });
+
+      textEl.addEventListener("click", function (event) {
+        const button = event.target.closest(".social-proof-product");
+        if (!button) {
+          return;
+        }
+        focusProduct(button.getAttribute("data-product") || "");
+      });
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          hideToast(true);
+          clearScheduleTimer();
+          return;
+        }
+        schedule(FIRST_DELAY_MS);
+      });
+
+      const observer = new MutationObserver(function () {
+        if (visible && isBlocked()) {
+          hideToast(true);
+          schedule(BLOCK_RETRY_MS);
+        }
+      });
+      observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+      shuffleOrder();
+      schedule(FIRST_DELAY_MS);
+    }
+
     function initDeliveryPopup() {
       if (!deliveryModalBackdrop || !deliveryModalClose) {
         return;
@@ -3786,6 +4193,7 @@
     initAboutPopup();
     initBottomNav();
     initCartMobileDismiss();
+    initSocialProofToast();
     loadProducts();
 
     const footerCredit = document.getElementById("footer-credit");

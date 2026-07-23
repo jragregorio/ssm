@@ -42,6 +42,11 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.3
+
+- Demo social-proof purchase toasts (centered above the nav)
+- Floating pill-style mobile bottom navbar
+
 ### v1.7.2
 
 - Skeleton product cards and clearer loading label while the catalog loads from Sheets
