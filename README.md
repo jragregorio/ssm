@@ -42,6 +42,10 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.4
+
+- Contact uses the Viber business QR and chat link (`viber.me/639761633063`)
+
 ### v1.7.3
 
 - Demo social-proof purchase toasts (centered above the nav)
