@@ -42,6 +42,12 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.7
+
+- Product cards: drop descriptions; larger name and price (price is the largest)
+- Shorter About copy; pricing note says prices start at the amounts shown
+- Cart button overhangs a slim floating navbar (`==( )==`)
+
 ### v1.7.6
 
 - More demo social-proof toasts for Shrimp (Large) orders
