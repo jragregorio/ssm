@@ -42,6 +42,10 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.6
+
+- More demo social-proof toasts for Shrimp (Large) orders
+
 ### v1.7.5
 
 - Site favicon uses the South Seafood Market logo
