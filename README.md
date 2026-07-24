@@ -42,6 +42,11 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.5
+
+- Site favicon uses the South Seafood Market logo
+- Tighter mobile spacing between product listings and footer
+
 ### v1.7.4
 
 - Contact uses the Viber business QR and chat link (`viber.me/639761633063`)
