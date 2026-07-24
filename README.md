@@ -42,6 +42,11 @@ This project **does not** process card or online wallet payments. It only captur
 
 ## Changelog
 
+### v1.7.8
+
+- Social-proof toasts move to the top bar and include kg amounts
+- Header watermark logo at 30% opacity (oversized, clipped to bar height)
+
 ### v1.7.7
 
 - Product cards: drop descriptions; larger name and price (price is the largest)

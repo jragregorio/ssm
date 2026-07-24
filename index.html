@@ -68,6 +68,7 @@
         0 1px 0 rgba(255, 255, 255, 0.65) inset,
         0 8px 24px var(--header-accent-glow);
       backdrop-filter: blur(8px);
+      overflow: hidden;
     }
 
     .nav {
@@ -124,6 +125,17 @@
 
     .brand-secondary {
       font-weight: 700;
+    }
+
+    .header-logo-mark {
+      flex-shrink: 0;
+      width: 5.75rem;
+      height: 5.75rem;
+      margin: -1.15rem -0.35rem -1.15rem 0;
+      object-fit: contain;
+      opacity: 0.3;
+      pointer-events: none;
+      user-select: none;
     }
 
     .nav-links {
@@ -1463,24 +1475,38 @@
       }
     }
 
-    /* Demo social-proof purchase toast */
+    /* Demo social-proof purchase toast — top bar, matches site header height */
     .social-proof-toast {
       position: fixed;
-      left: 50%;
-      bottom: 1rem;
-      z-index: 85;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: auto;
+      z-index: 101;
       display: none;
       align-items: center;
-      gap: 0.75rem;
-      width: min(22.5rem, calc(100vw - 2rem));
-      padding: 0.7rem 2.35rem 0.7rem 0.7rem;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: #fff;
-      box-shadow: 0 12px 28px rgba(16, 70, 80, 0.16);
+      gap: 0.65rem;
+      box-sizing: border-box;
+      width: 100%;
+      max-width: none;
+      height: 4.5rem;
+      padding: 0 2.5rem 0 0.85rem;
+      border: 0;
+      border-bottom: 1px solid var(--header-accent-border);
+      border-radius: 0;
+      background: linear-gradient(
+        165deg,
+        #d8eef2 0%,
+        #e8f5f7 38%,
+        #f2f9fb 72%,
+        rgba(247, 251, 252, 0.98) 100%
+      );
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.65) inset,
+        0 8px 24px var(--header-accent-glow);
       color: var(--text);
       opacity: 0;
-      transform: translate(-50%, 0.85rem);
+      transform: translateY(-110%);
       pointer-events: none;
       transition: opacity 0.28s ease, transform 0.28s ease;
     }
@@ -1488,20 +1514,20 @@
     .social-proof-toast.is-visible {
       display: flex;
       opacity: 1;
-      transform: translate(-50%, 0);
+      transform: translateY(0);
       pointer-events: auto;
     }
 
     .social-proof-toast.is-hiding {
       opacity: 0;
-      transform: translate(-50%, 0.85rem);
+      transform: translateY(-110%);
       pointer-events: none;
     }
 
     .social-proof-media {
-      flex: 0 0 3.35rem;
-      width: 3.35rem;
-      height: 3.35rem;
+      flex: 0 0 2.55rem;
+      width: 2.55rem;
+      height: 2.55rem;
       border-radius: 999px;
       overflow: hidden;
       border: 2px solid #fff;
@@ -1520,14 +1546,22 @@
       min-width: 0;
       flex: 1 1 auto;
       padding-right: 0.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.1rem;
     }
 
     .social-proof-text {
       margin: 0;
-      font-size: 0.98rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      line-height: 1.35;
+      line-height: 1.25;
       color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .social-proof-product {
@@ -1548,18 +1582,22 @@
     }
 
     .social-proof-meta {
-      margin: 0.35rem 0 0;
-      font-size: 0.78rem;
+      margin: 0;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .social-proof-close {
       position: absolute;
-      top: 0.35rem;
-      right: 0.35rem;
+      top: 50%;
+      right: 0.45rem;
+      transform: translateY(-50%);
       width: 2rem;
       height: 2rem;
       border: 0;
@@ -1574,17 +1612,17 @@
     .social-proof-close:hover,
     .social-proof-close:focus-visible {
       color: var(--text);
-      background: #eef4f6;
+      background: rgba(255, 255, 255, 0.7);
     }
 
     @media (prefers-reduced-motion: reduce) {
       .social-proof-toast {
         transition: opacity 0.15s ease;
-        transform: translate(-50%, 0);
+        transform: translateY(0);
       }
 
       .social-proof-toast.is-hiding {
-        transform: translate(-50%, 0);
+        transform: translateY(0);
       }
     }
 
@@ -1703,6 +1741,12 @@
         letter-spacing: 0.03em;
       }
 
+      .header-logo-mark {
+        width: 5.25rem;
+        height: 5.25rem;
+        margin: -1.35rem -0.45rem -1.35rem 0;
+      }
+
       .hero {
         display: none;
       }
@@ -1816,20 +1860,37 @@
       }
 
       .social-proof-toast {
-        left: 50%;
-        bottom: calc(
-          var(--mobile-nav-clearance) + var(--mobile-tab-bar-inset) + env(safe-area-inset-bottom, 0px) + 0.85rem
-        );
-        width: min(20.5rem, calc(100vw - 1.7rem));
-        padding: 0.75rem 2.4rem 0.75rem 0.75rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        width: 100%;
+        height: var(--mobile-header-height);
+        max-height: var(--mobile-header-height);
+        padding: 0 2.35rem 0 0.75rem;
+        gap: 0.55rem;
+      }
+
+      .social-proof-media {
+        flex-basis: 2.35rem;
+        width: 2.35rem;
+        height: 2.35rem;
       }
 
       .social-proof-text {
-        font-size: 1.02rem;
+        font-size: 0.84rem;
+        line-height: 1.2;
+        -webkit-line-clamp: 2;
       }
 
       .social-proof-meta {
-        font-size: 0.82rem;
+        font-size: 0.65rem;
+      }
+
+      .social-proof-close {
+        right: 0.35rem;
+        width: 1.85rem;
+        height: 1.85rem;
       }
 
       /* Floating pill demo — scoop background unused */
@@ -2134,6 +2195,15 @@
       <button id="desktop-cart-toggle" class="cart-indicator" type="button" aria-expanded="false" aria-controls="cart-panel">
         Cart: <span id="cart-count">0</span> items
       </button>
+      <img
+        class="header-logo-mark"
+        src="images/ssm-logo_CLEAN.png"
+        alt=""
+        width="64"
+        height="64"
+        decoding="async"
+        aria-hidden="true"
+      >
     </div>
   </header>
 
@@ -2202,7 +2272,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.7.7</p>
+      <p class="footer-credit" id="footer-credit">Created by JRAG 2026 • v1.7.8</p>
     </div>
   </footer>
 
@@ -2439,7 +2509,7 @@
     const RATE_LIMIT_WINDOW_MS = 60 * 1000;
     const LAST_ORDER_TS_KEY = "ahsom-last-order-ts";
     const LAST_ORDER_SIGNATURE_KEY = "ahsom-last-order-signature";
-    const SITE_VERSION = "1.7.7";
+    const SITE_VERSION = "1.7.8";
     const TOUR_SEEN_KEY = "ssm-tour-seen-v1";
 
     function isValidCartItem(item) {
@@ -3259,6 +3329,7 @@
           name: "Maria",
           place: "Alabang Hills",
           product: "Pompano",
+          kg: 2,
           image: "images/product-pompano.png",
           when: "2 hours ago"
         },
@@ -3266,6 +3337,7 @@
           name: "Raphael",
           place: "AHVA",
           product: "Pompano",
+          kg: 3,
           image: "images/product-pompano.png",
           when: "45 minutes ago"
         },
@@ -3273,6 +3345,7 @@
           name: "Ana",
           place: "Quezon City",
           product: "Bangus",
+          kg: 2,
           image: "images/product-bangus.png",
           when: "6 hours ago"
         },
@@ -3280,6 +3353,7 @@
           name: "Rico",
           place: "Muntinlupa",
           product: "Bangus",
+          kg: 5,
           image: "images/product-bangus.png",
           when: "1 hour ago"
         },
@@ -3287,6 +3361,7 @@
           name: "Raymond",
           place: "Alabang Hills",
           product: "Salmon",
+          kg: 4,
           image: "images/product-salmon.png",
           when: "3 hours ago"
         },
@@ -3294,6 +3369,7 @@
           name: "Beatrice",
           place: "Las Piñas",
           product: "Salmon",
+          kg: 1,
           image: "images/product-salmon.png",
           when: "20 minutes ago"
         },
@@ -3301,6 +3377,7 @@
           name: "Carlo",
           place: "AHVA",
           product: "Shrimp (Large)",
+          kg: 1,
           image: "images/product-shrimp.png",
           when: "30 minutes ago"
         },
@@ -3308,6 +3385,7 @@
           name: "Elena",
           place: "Alabang Hills",
           product: "Shrimp (Large)",
+          kg: 2,
           image: "images/product-shrimp.png",
           when: "4 hours ago"
         },
@@ -3315,6 +3393,7 @@
           name: "Miguel",
           place: "Parañaque",
           product: "Shrimp (Large)",
+          kg: 3,
           image: "images/product-shrimp.png",
           when: "1 hour ago"
         }
@@ -3353,6 +3432,20 @@
 
       function nextGapMs() {
         return GAP_MS_MIN + Math.floor(Math.random() * (GAP_MS_MAX - GAP_MS_MIN + 1));
+      }
+
+      function syncToastToHeaderHeight() {
+        const header = document.querySelector("header");
+        if (!header) {
+          return;
+        }
+        const height = Math.round(header.getBoundingClientRect().height);
+        if (height < 1) {
+          return;
+        }
+        toast.style.height = height + "px";
+        toast.style.maxHeight = height + "px";
+        document.documentElement.style.setProperty("--mobile-header-height", height + "px");
       }
 
       function isBlocked() {
@@ -3432,13 +3525,16 @@
       }
 
       function renderDemo(demo) {
+        const kgLabel = Number(demo.kg) || 1;
         imageEl.src = demo.image;
         imageEl.alt = demo.product;
         textEl.innerHTML =
           escapeHtml(demo.name) +
           " from " +
           escapeHtml(demo.place) +
-          " has recently purchased " +
+          " has recently bought " +
+          escapeHtml(String(kgLabel)) +
+          "kg of " +
           '<button class="social-proof-product" type="button" data-product="' +
           escapeHtml(demo.product) +
           '">' +
@@ -3457,6 +3553,7 @@
         }
         const demo = demos[order[cursor]];
         cursor += 1;
+        syncToastToHeaderHeight();
         renderDemo(demo);
         toast.hidden = false;
         toast.setAttribute("aria-hidden", "false");
@@ -3503,6 +3600,8 @@
       });
       observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
 
+      window.addEventListener("resize", syncToastToHeaderHeight);
+      syncToastToHeaderHeight();
       shuffleOrder();
       schedule(FIRST_DELAY_MS);
     }
